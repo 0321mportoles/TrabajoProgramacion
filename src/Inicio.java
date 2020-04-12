@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -7,6 +11,8 @@ import java.util.Scanner;
 public class Inicio {
 
 	public static Scanner reader = new Scanner(System.in);
+	public static List<Object> libros = Libro.loadDefaultObjects();
+	
 	/**
 	 * @param args
 	 */
@@ -102,8 +108,59 @@ public class Inicio {
 	}
 	
 	private static void insertarElemento(int op) {
+		switch (op) {
+		case 1:
+			Libro libro;
+			libro = pedirDatosNuevoLibro();
+			libros.add(libro);
+			break;
+
+		default:
+			break;
+		}
 		
+	}
+
+	private static Libro pedirDatosNuevoLibro() {
+		System.out.println("Insertar nuevo libro");
+		System.out.println("===========================================================================");
 		
+		String titulo = pedirString("Titulo");
+		String editorial = pedirString("Editorial");
+		String fecha = pedirFecha("Fecha de publicación (YYYY-mm-dd): ");
+		
+		return new Libro(titulo, editorial, fecha);
+	}
+
+	private static String pedirFecha(String string) {
+		boolean fechaOk = false;
+		
+		do {
+			System.out.println(string + ": ");
+			string = reader.nextLine();
+			try {
+				LocalDate.parse(string);
+			} catch (DateTimeParseException e) {
+				// TODO: handle exception
+			}
+			
+		} while (!fechaOk);
+		
+		return string;
+	}
+
+	private static String pedirString() {
+		return pedirString("Introduce una cadena de texto: ");
+	}
+
+	private static String pedirString(String string) {
+		String cadena;
+		do {
+			System.out.println(string + ": ");
+			cadena = reader.nextLine();
+		} while ((cadena != null) && (!cadena.equals("")));
+		
+		return cadena;
 	}
 
 	private static void modificarElementos() {
@@ -132,7 +189,7 @@ public class Inicio {
 	}	
 
 	private static void eliminarElemento(int op) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 	
@@ -148,7 +205,31 @@ public class Inicio {
 
 	private static void visualizarElemento(int op) {
 		// TODO Auto-generated method stub
+		switch (op) {
+		case 1:
+			
+			break;
+		case 2:
+			
+			break;
+		case 3:
+			System.out.println("Mostrando todos los libros (" + libros.size() + ") cargados en memoria");
+			System.out.println("===========================================================================");
+			imprimirObjectos(libros);
+			
+
+		default:
+			break;
+		}
 		
+	}
+	
+	private static void imprimirObjectos(List <Object> objetos)
+	{
+		for (Iterator iterator = objetos.iterator(); iterator.hasNext();) {
+			Object o = (Object) iterator.next();
+			System.out.println(o);
+		}		
 	}
 
 	private static int menuElementos() {
