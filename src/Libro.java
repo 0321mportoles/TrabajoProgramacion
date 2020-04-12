@@ -11,7 +11,7 @@ public class Libro {
 	{
 		this.titulo = titulo;
 		this.editorial = editorial;
-		this.publicacion= LocalDate.parse(publicacion);
+		this.publicacion = LocalDate.parse(publicacion);
 	}
 
 	public String getEditorial()
@@ -29,6 +29,22 @@ public class Libro {
 		return this.publicacion;
 	}
 
+
+	public void setEditorial(String value)
+	{
+		this.editorial = value;
+	}
+	
+	public void setTitulo(String value)
+	{
+		this.titulo = value;
+	}
+	
+	public void setPublicacion(String value)
+	{
+		this.publicacion = LocalDate.parse(value);
+	}
+	
 	public String toString() {
 		return 
 			" Libro ("
