@@ -12,6 +12,8 @@ public class Inicio {
 
 	public static Scanner reader = new Scanner(System.in);
 	public static List<Object> libros = Libro.loadDefaultObjects();
+	public static List<Object> autores = Autor.loadDefaultObjects();
+	public static List<Object> eventos = Evento.loadDefaultObjects();
 	
 	/**
 	 * @param args
@@ -37,7 +39,7 @@ public class Inicio {
 	private static int mostrarMenuPrincipal() {
 		System.out.println();
 		System.out.println("=======================================================================================");
-		System.out.println("                     TRABAJO FIN DE CURSO - PROGRAMACIÓN 2019-2020                     ");
+		System.out.println("                          TRABAJO PROGRAMACIÓN CURSO 2019-2020                         ");
 		System.out.println("=======================================================================================");
 		System.out.println("1 .- Insertar elementos");
 		System.out.println("2 .- Realizar búsqueda");
@@ -174,7 +176,7 @@ public class Inicio {
 	}	
 
 	private static void modificarElemento(int op) {
-		// TODO Auto-generated method stub
+	
 		
 	}
 
@@ -204,18 +206,21 @@ public class Inicio {
 	}
 
 	private static void visualizarElemento(int op) {
-		// TODO Auto-generated method stub
 		switch (op) {
-		case 1:
-			
-			break;
-		case 2:
-			
-			break;
-		case 3:
-			System.out.println("Mostrando todos los libros (" + libros.size() + ") cargados en memoria");
-			System.out.println("===========================================================================");
-			imprimirObjectos(libros);
+			case 1:
+				System.out.println("Mostrando todos los autores (" + autores.size() + ") cargados en memoria");
+				System.out.println("===========================================================================");
+				imprimirObjectos(autores);
+				break;
+			case 2:
+				System.out.println("Mostrando todos los libros (" + eventos.size() + ") cargados en memoria");
+				System.out.println("===========================================================================");
+				imprimirObjectos(eventos);
+				break;
+			case 3:
+				System.out.println("Mostrando todos los libros (" + libros.size() + ") cargados en memoria");
+				System.out.println("===========================================================================");
+				imprimirObjectos(libros);
 			
 
 		default:
@@ -226,10 +231,12 @@ public class Inicio {
 	
 	private static void imprimirObjectos(List <Object> objetos)
 	{
-		for (Iterator iterator = objetos.iterator(); iterator.hasNext();) {
-			Object o = (Object) iterator.next();
+		Object o;
+		
+		for (Iterator i = objetos.iterator(); i.hasNext();) {
+			o = (Object) i.next();
 			System.out.println(o);
-		}		
+		}
 	}
 
 	private static int menuElementos() {

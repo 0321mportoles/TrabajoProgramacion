@@ -6,12 +6,13 @@ import java.util.List;
 
 public class Libro {
 	
-	
+	// atributos 
 	private String titulo;
 	private String editorial;
 	private LocalDate publicacion;
 	private int paginas;
 	
+	// constructor sin paginas
 	public Libro(String titulo, String editorial, String publicacion)
 	{
 		this.titulo = titulo;
@@ -20,6 +21,7 @@ public class Libro {
 		this.paginas = 0;
 	}
 	
+	// constructor completo
 	public Libro(String titulo, String editorial, String publicacion, int paginas)
 	{
 		this.titulo = titulo;
