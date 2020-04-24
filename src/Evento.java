@@ -42,6 +42,11 @@ public class Evento {
 		this.fecha = LocalDate.parse(fecha);
 	}
 	
+	public String toString() 
+	{
+		return this.getNombre() + " en " + this.getLugar()+ " el " + this.getFecha();
+	}
+	
 	public static List<Object> loadDefaultObjects()
 	{
 		List<Object> eventos = new ArrayList<Object>();
@@ -52,10 +57,6 @@ public class Evento {
 		return eventos;
 	}
 	
-	public String toString() 
-	{
-		return this.getNombre() + " en " + this.getLugar()+ " el " + this.getFecha();
-	}
 	
 	
 	

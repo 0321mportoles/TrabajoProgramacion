@@ -23,7 +23,7 @@ public class Autor {
 
 	// getters y setters
 	public String getNombreCompleto() {
-		return nombreCompleto;
+		return this.nombreCompleto;
 	}
 
 	public void setNombreCompleto(String nombreCompleto) {
@@ -31,7 +31,7 @@ public class Autor {
 	}
 
 	public LocalDate getFechaNacimiento() {
-		return fechaNacimiento;
+		return this.fechaNacimiento;
 	}
 
 	public void setFechaNacimiento(String fechaNacimiento) {
@@ -39,7 +39,7 @@ public class Autor {
 	}
 
 	public String getPais() {
-		return pais;
+		return this.pais;
 	}
 
 	public void setPais(String pais) {
@@ -48,7 +48,8 @@ public class Autor {
 	
 	public String toString() 
 	{
-		return this.getNombreCompleto() + " - " + this.getPais();
+		String fecha = (this.getFechaNacimiento() == null)? "": "==>" + this.getFechaNacimiento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		return this.getNombreCompleto() + " - " + this.getPais() + fecha;
 	}
 	
 	public static List<Object> loadDefaultObjects()

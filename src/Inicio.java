@@ -56,7 +56,18 @@ public class Inicio {
 		System.out.println("=======================================================================================");
 		System.out.print("Elija una opción de las anteriores (0 para salir): ");
 
-		return reader.nextInt();
+		return Integer.parseInt(reader.nextLine());
+	}
+	
+	private static int menuElementos() {
+		System.out.println("1 .- Libro");
+		System.out.println("2 .- Autor");
+		System.out.println("3 .- Evento de un libro");
+		System.out.println("0 .- Volver atrás");
+		
+		System.out.print(" - Elige una opción de untre las disponibles (0-3): ");
+		
+		return Integer.parseInt(reader.nextLine());
 	}
 
 	private static void ejecutarOpciones(int opcion) {
@@ -116,11 +127,43 @@ public class Inicio {
 			libro = pedirDatosNuevoLibro();
 			libros.add(libro);
 			break;
+		case 2:
+			Autor autor;
+			autor = pedirDatosNuevoAutor();
+			autores.add(autores);
+			break;
+		case 3:
+			Evento evento;
+			evento = pedirDatosNuevoEvento();
+			eventos.add(evento);
+			break;
 
 		default:
 			break;
 		}
 		
+	}
+
+	private static Evento pedirDatosNuevoEvento() {
+		System.out.println("Insertar nuevo Evento");
+		System.out.println("===========================================================================");
+		
+		String nombre = pedirString("Nombre");
+		String lugar = pedirString("Lugar");
+		String fecha = pedirFecha("Fecha (YYYY-mm-dd)");
+		
+		return new Evento(nombre, lugar, fecha);
+	}
+
+	private static Autor pedirDatosNuevoAutor() {
+		System.out.println("Insertar nuevo autor");
+		System.out.println("===========================================================================");
+		
+		String nombreCompleto = pedirString("Nombre completo");
+		String fechaNacimiento = pedirFecha("Fecha de nacimiento (YYY-mm-dd)");
+		String pais = pedirString("Pais");
+		
+		return new Autor(nombreCompleto, fechaNacimiento, pais);
 	}
 
 	private static Libro pedirDatosNuevoLibro() {
@@ -129,11 +172,29 @@ public class Inicio {
 		
 		String titulo = pedirString("Titulo");
 		String editorial = pedirString("Editorial");
-		String fecha = pedirFecha("Fecha de publicación (YYYY-mm-dd): ");
+		String fecha = pedirFecha("Fecha de publicación (YYYY-mm-dd)");
 		
 		return new Libro(titulo, editorial, fecha);
 	}
 
+	private static void modificarDatosLibro(Libro libroAModificar) {
+		String titulo = pedirStringPermitirVacio("Titulo (enter si no quieres modificar)");
+		String editorial = pedirStringPermitirVacio("Editorial (enter si no quieres modificar)");
+		String fecha = pedirStringPermitirVacio("Fecha de publicación (YYYY-mm-dd) (enter si no quieres modificar)");
+		
+		if ((titulo != null) && (!titulo.equals(""))) {
+			libroAModificar.setTitulo(titulo);
+		}
+		
+		if ((editorial != null) && (!editorial.equals(""))) {
+			libroAModificar.setEditorial(editorial);
+		}
+		
+		if ((fecha != null) && (!fecha.equals(""))) {
+			libroAModificar.setPublicacion(fecha);
+		}
+	}
+	
 	private static String pedirFecha(String string) {
 		boolean fechaOk = false;
 		
@@ -158,9 +219,18 @@ public class Inicio {
 	private static String pedirString(String string) {
 		String cadena;
 		do {
-			System.out.println(string + ": ");
+			System.out.print(string + ": ");
 			cadena = reader.nextLine();
 		} while ((cadena != null) && (!cadena.equals("")));
+		
+		return cadena;
+	}
+	
+	private static String pedirStringPermitirVacio(String string) {
+		String cadena;
+		
+		System.out.print(string + ": ");
+		cadena = reader.nextLine();
 		
 		return cadena;
 	}
@@ -176,15 +246,90 @@ public class Inicio {
 	}	
 
 	private static void modificarElemento(int op) {
-	
+		int n;
+		switch (op) {
+		case 1:
+			n = pedirNumeroDeElemento();
+			Libro libroAModificar = (Libro) libros.get(n);
+			modificarDatosLibro(libroAModificar);
+
+			break;
+		case 2:
+			
+			n = pedirNumeroDeElemento();
+			Autor autorAModificar = (Autor) autores.get(n);
+			modificarDatosAutor(autorAModificar);
+
+			break;
+		case 3:
+			n = pedirNumeroDeElemento();
+			Evento eventoAModificar = (Evento) eventos.get(n);
+			modificarDatosEvento(eventoAModificar);
+			
+
+		break;
+
+		default:
+			break;
+		}
 		
+	}
+
+	private static void modificarDatosEvento(Evento eventoAModificar) {
+		String nombre = pedirStringPermitirVacio("Nombre (enter si no quieres modificar)");
+		String lugar = pedirStringPermitirVacio("Lugar (enter si no quieres modificar)");
+		String fecha = pedirStringPermitirVacio("Fecha (YYYY-mm-dd) (enter si no quieres modificar)");
+		
+		if ((nombre != null) && (!nombre.equals(""))) {
+			eventoAModificar.setNombre(nombre);
+		}
+		
+		if ((lugar != null) && (!lugar.equals(""))) {
+			eventoAModificar.setLugar(lugar);
+		}
+		
+		if ((fecha != null) && (!fecha.equals(""))) {
+			eventoAModificar.setFecha(fecha);
+		}
+		
+	}
+
+	private static void modificarDatosAutor(Autor autorAModificar) {
+		String nombreCompleto = pedirStringPermitirVacio("Nombre completo (enter si no quieres modificar)");
+		try {
+			String fechaNacimiento = pedirStringPermitirVacio("Fecha de nacimiento (YYYY-mm-dd) (enter si no quieres modificar)");
+			
+			if ((fechaNacimiento != null) && (!fechaNacimiento.equals(""))) {
+				autorAModificar.setFechaNacimiento(fechaNacimiento);
+				
+			}
+		} catch (DateTimeParseException e) {
+			System.out.println("******* ERROR: La fecha es invalida");
+		}
+		
+		String pais = pedirStringPermitirVacio("Pais (enter si no quieres modificar)");
+		
+		if ((nombreCompleto != null) && (!nombreCompleto.equals(""))) {
+			autorAModificar.setNombreCompleto(nombreCompleto);
+		}
+		
+
+		if ((pais != null) && (!pais.equals(""))) {
+			autorAModificar.setPais(pais);
+		}
+		
+	}
+
+	private static int pedirNumeroDeElemento() {
+		System.out.print("¿Que numero de elemento quieres modificar? ");
+
+		return Integer.parseInt(reader.nextLine());
 	}
 
 	private static void eliminarElementos() {
 		int op;
 		
-		System.out.println("¿Que elemento quieres eliminar?");
-		System.out.println("===========================================================================");
+		System.out.print("¿Que elemento quieres eliminar? ");
 		
 		op = menuElementos();
 		eliminarElemento(op);
@@ -208,20 +353,22 @@ public class Inicio {
 	private static void visualizarElemento(int op) {
 		switch (op) {
 			case 1:
-				System.out.println("Mostrando todos los autores (" + autores.size() + ") cargados en memoria");
-				System.out.println("===========================================================================");
-				imprimirObjectos(autores);
-				break;
-			case 2:
-				System.out.println("Mostrando todos los libros (" + eventos.size() + ") cargados en memoria");
-				System.out.println("===========================================================================");
-				imprimirObjectos(eventos);
-				break;
-			case 3:
 				System.out.println("Mostrando todos los libros (" + libros.size() + ") cargados en memoria");
 				System.out.println("===========================================================================");
 				imprimirObjectos(libros);
-			
+				
+				break;
+			case 2:
+				System.out.println("Mostrando todos los autores (" + autores.size() + ") cargados en memoria");
+				System.out.println("===========================================================================");
+				imprimirObjectos(autores);
+				
+				break;
+			case 3:
+				System.out.println("Mostrando todos los eventos sobre libros (" + eventos.size() + ") cargados en memoria");
+				System.out.println("===========================================================================");
+				imprimirObjectos(eventos);
+				break;
 
 		default:
 			break;
@@ -232,21 +379,13 @@ public class Inicio {
 	private static void imprimirObjectos(List <Object> objetos)
 	{
 		Object o;
+		int contador = 0;
 		
 		for (Iterator i = objetos.iterator(); i.hasNext();) {
 			o = (Object) i.next();
-			System.out.println(o);
+			System.out.println(contador++ + " " + o);
 		}
 	}
 
-	private static int menuElementos() {
-		System.out.println("1 .- Autor");
-		System.out.println("2 .- Presentacion de un libro");
-		System.out.println("3 .- Libro");
-		System.out.println("0 .- Volver atrás");
-		
-		System.out.print(" - Elige una opción de untre las disponibles (0-3): ");
-		
-		return reader.nextInt();
-	}
+
 }
