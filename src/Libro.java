@@ -1,7 +1,9 @@
 // Learn more: https://www.baeldung.com/java-8-date-time-intro
 import java.time.*;
+import java.time.chrono.ChronoLocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Libro {
@@ -113,4 +115,47 @@ public class Libro {
 //		
 		return libros;
 	}
+	
+	public static List<Object> buscarLibrosPorTitulo(List<Object> lista, String buscando) {
+		List<Object> libros = new ArrayList<Object>();
+		Object o;
+		System.out.println("Buscando libro por titulo que contenga: '" + buscando + "'");
+		for (Iterator<Object> i = lista.iterator(); i.hasNext();) {
+			o = (Object) i.next();
+			if (((Libro) o).getTitulo().toLowerCase().contains(buscando.toLowerCase())) {
+				libros.add(o);
+			}
+		}
+		
+		return libros;
+	}
+	
+	public static List<Object> buscarLibrosPorEditorial(List<Object> lista, String buscando) {
+		List<Object> libros = new ArrayList<Object>();
+		Object o;
+		System.out.println("Buscando libro por editorial que contenga: '" + buscando + "'");
+		for (Iterator<Object> i = lista.iterator(); i.hasNext();) {
+			o = (Object) i.next();
+			if (((Libro) o).getEditorial().toLowerCase().contains(buscando.toLowerCase())) {
+				libros.add(o);
+			}
+		}
+		
+		return libros;
+	}
+	
+	public static List<Object> buscarLibrosPorFechaPublicacion(List<Object> lista, String buscando) {
+		List<Object> libros = new ArrayList<Object>();
+		Object o;
+		System.out.println("Buscando libro por fecha de publicacion '" + buscando + "'");
+		for (Iterator<Object> i = lista.iterator(); i.hasNext();) {
+			o = (Object) i.next();
+			if (((Libro) o).getPublicacion().isAfter(LocalDate.parse(buscando))) {
+				libros.add(o);
+			}
+		}
+		
+		return libros;
+	}
+	
 }

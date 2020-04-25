@@ -60,6 +60,7 @@ public class Inicio {
 	}
 	
 	private static int menuElementos() {
+		System.out.println();
 		System.out.println("1 .- Libro");
 		System.out.println("2 .- Autor");
 		System.out.println("3 .- Evento de un libro");
@@ -77,7 +78,7 @@ public class Inicio {
 				insertarElementos();
 				break;
 			case 2:
-				
+				buscarElementos();
 				
 				break;
 			case 3:
@@ -108,6 +109,97 @@ public class Inicio {
 				
 				break;
 		}
+	}
+
+	private static void buscarElementos() {
+		int op;
+		
+		System.out.println("¿Que tipo de elemento quieres buscar?");
+		System.out.println("===========================================================================");
+		
+		op = menuElementos();
+		buscarElemento(op);
+		
+	}
+
+	private static void buscarElemento(int op) {
+		switch (op) {
+			// Busqueda de libros
+			case 1:
+				buscarLibros();
+				break;
+			// Busqueda de autores
+			case 2:
+				Autor autor;
+				//autor = buscarAutores();
+			
+				break;
+			// Busqueda de eventos
+			case 3:
+				Evento evento;
+				//evento = buscarEventos();
+				
+				break;
+	
+			default:
+				break;
+		}
+		
+		
+	}
+	
+	private static void buscarLibros() {
+		int op;
+		List<Object> librosBuscados;
+		
+		op= menuCriterioDeBusqueda();
+		switch (op) {
+			// Buscando por titulo
+			case 1:
+				librosBuscados = Libro.buscarLibrosPorTitulo(libros, pedirString("Titulo a buscar"));
+				imprimirObjectos(librosBuscados);
+				break;
+			// Buscando por autor
+			case 2:
+			//	librosBuscados = Libro.buscarLibrosPorAutor(libros, pedirString("Autor a buscar"));
+			//	imprimirObjectos(librosBuscados);
+				break;
+			// Buscando por fecha de publicacion
+			case 3:
+				boolean error = true;
+				while (error) {
+					try {
+						String fecha = pedirString("Fecha de publicacion a buscar (YYYY-mm-dd)");
+						LocalDate.parse(fecha);
+						librosBuscados = Libro.buscarLibrosPorFechaPublicacion(libros, fecha);
+						imprimirObjectos(librosBuscados);
+						error = false;
+					} catch (DateTimeParseException e) {
+						System.out.println("******** ERROR. La fecha debe seguir el formato especificado **********");
+					}
+				}
+				
+				break;
+			// Buscando por editorial
+			case 4:
+				librosBuscados = Libro.buscarLibrosPorEditorial(libros, pedirString("Editorial a buscar"));
+				imprimirObjectos(librosBuscados);	
+				break;
+			
+		}
+	}
+
+	private static int menuCriterioDeBusqueda() {
+		System.out.println("¿Qué criterio de busqueda quieres?");
+		System.out.println("1 .- Por titulo");
+		System.out.println("2 .- Por autor");
+		System.out.println("3 .- Por fecha de publicacion");
+		System.out.println("4 .- Por editorial");
+		System.out.println("0 .- Volver atrás");
+		
+		System.out.print(" - Elige una opción de untre las disponibles (0-4): ");
+		
+		return Integer.parseInt(reader.nextLine());
 	}
 
 	private static void insertarElementos() {
@@ -221,7 +313,7 @@ public class Inicio {
 		do {
 			System.out.print(string + ": ");
 			cadena = reader.nextLine();
-		} while ((cadena != null) && (!cadena.equals("")));
+		} while ((cadena == null) && (cadena.equals("")));
 		
 		return cadena;
 	}
@@ -329,6 +421,7 @@ public class Inicio {
 	private static void eliminarElementos() {
 		int op;
 		
+		System.out.println();
 		System.out.print("¿Que elemento quieres eliminar? ");
 		
 		op = menuElementos();
@@ -336,9 +429,31 @@ public class Inicio {
 	}	
 
 	private static void eliminarElemento(int op) {
-		
+		int n;
+		switch (op) {
+		case 1:
+			n = pedirNumeroDeElemento();
+			System.out.println("Borrando libro con titulo " + ((Libro) libros.get(n)).getTitulo());
+			Libro libroAEliminar = (Libro) libros.remove(n);
+			break;
+		case 2:
+			n = pedirNumeroDeElemento();
+			System.out.println("Borrando Autor " + ((Autor) autores.get(n)).getNombreCompleto());
+			Autor autorAEliminar = (Autor) autores.remove(n);
+			break;
+		case 3:
+			n = pedirNumeroDeElemento();
+			System.out.println("Borrando Evento " + ((Evento) eventos.get(n)).getNombre());
+			Evento eventoAEliminar = (Evento) eventos.remove(n);
+				
+		break;
+
+		default:
+			break;
+		}
 		
 	}
+	
 	
 	private static void visualizarElementos() {
 		int op;
