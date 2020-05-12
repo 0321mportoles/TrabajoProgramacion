@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
@@ -11,9 +12,9 @@ import java.util.Scanner;
 public class Inicio {
 
 	public static Scanner reader = new Scanner(System.in);
-	public static List<Object> libros = Libro.loadDefaultObjects();
-	public static List<Object> autores = Autor.loadDefaultObjects();
-	public static List<Object> eventos = Evento.loadDefaultObjects();
+	public static List<Object> libros  = new ArrayList<Object>();
+	public static List<Object> autores = new ArrayList<Object>();
+	public static List<Object> eventos = new ArrayList<Object>();
 	
 	/**
 	 * @param args
@@ -21,9 +22,7 @@ public class Inicio {
 	public static void main(String[] args) {
 		int opcion;
 		
-		// Create new object example
-		// Libro l = new Libro("La historia interminable", "ALFAGUARA", "1979-09-01");
-		// System.out.println(l);
+
 		System.out.println();
 		
 		do {
@@ -37,6 +36,7 @@ public class Inicio {
 	}
 
 	private static int mostrarMenuPrincipal() {
+		int numero = -1;
 		System.out.println();
 		System.out.println("=======================================================================================");
 		System.out.println("                          TRABAJO PROGRAMACIÓN CURSO 2019-2020                         ");
@@ -55,20 +55,35 @@ public class Inicio {
 		System.out.println("0 .- Salir del programa");
 		System.out.println("=======================================================================================");
 		System.out.print("Elija una opción de las anteriores (0 para salir): ");
+		
+		try {
+			numero = Integer.parseInt(reader.nextLine());
+		} catch (Exception e) {
+			System.out.print("La opcion introducida debe ser un numero");
+		}
 
-		return Integer.parseInt(reader.nextLine());
+		return numero;
+			
 	}
 	
 	private static int menuElementos() {
+		int numero = -1;
+		
 		System.out.println();
 		System.out.println("1 .- Libro");
 		System.out.println("2 .- Autor");
 		System.out.println("3 .- Evento de un libro");
 		System.out.println("0 .- Volver atrás");
-		
+		System.out.println("===================================================");
 		System.out.print(" - Elige una opción de untre las disponibles (0-3): ");
 		
-		return Integer.parseInt(reader.nextLine());
+		try {
+			numero = Integer.parseInt(reader.nextLine());
+		} catch (Exception e) {
+			System.out.print("La opcion introducida debe ser un numero");
+		}
+
+		return numero;
 	}
 
 	private static void ejecutarOpciones(int opcion) {
@@ -91,23 +106,59 @@ public class Inicio {
 				visualizarElementos();
 				break;
 			case 6:
-				
+				System.out.println("Importando a fichero de TEXTO");
+				if (Importar.importarDeFicheroTexto(autores, libros, eventos)) {
+					System.out.println("El fichero ha sido importado correctamente");
+				} else {
+					System.out.println("Ha habido un error en la importación");
+				}
 				break;
 			case 7:
-				
+				System.out.println("Exportando a fichero de TEXTO");
+				if (Exportar.exportarAFicheroTexto(autores, libros, eventos)) {
+					System.out.println("El fichero ha sido exportado correctamente");
+				} else {
+					System.out.println("Ha habido un error en la exportación");
+				}
 				break;
 			case 8:
-				
+				System.out.println("Importando a fichero BINARIO");
+				if (Importar.importarDeFicheroBinario(autores, libros, eventos)) {
+					System.out.println("El fichero ha sido importado correctamente");
+				} else {
+					System.out.println("Ha habido un error en la importación");
+				}
 				break;
 			case 9:
-
+				System.out.println("Exportando a fichero BINARIO");
+				if (Exportar.exportarAFicheroBinario(autores, libros, eventos)) {
+					System.out.println("El fichero ha sido exportado correctamente");
+				} else {
+					System.out.println("Ha habido un error en la exportación");
+				}
 				break;
-			case 10:
-				
-				break;
+//			case 10:
+//				System.out.println("Importando a fichero Acceso Aleatorio");
+//				if (Importar.importarDeFicheroDeAccesoAleatorio(autores, libros, eventos)) {
+//					System.out.println("El fichero ha sido importado correctamente");
+//				} else {
+//					System.out.println("Ha habido un error en la importación");
+//				}
+//				break;
+			
 			case 11:
+				System.out.println("Exportando a fichero Acceso Aleatorio");
+			if (Exportar.exportarAFicheroDeAccesoAleatorio(autores, libros, eventos)) {
+				System.out.println("El fichero ha sido exportado correctamente");
+			} else {
+				System.out.println("Ha habido un error en la exportación");
+			}
+				break;
+			case 0:
 				
 				break;
+			default:
+				System.out.println("La opción insertada es incorrecta");
 		}
 	}
 
@@ -115,7 +166,7 @@ public class Inicio {
 		int op;
 		
 		System.out.println("¿Que tipo de elemento quieres buscar?");
-		System.out.println("===========================================================================");
+		System.out.println("=====================================");
 		
 		op = menuElementos();
 		buscarElemento(op);
@@ -130,18 +181,16 @@ public class Inicio {
 				break;
 			// Busqueda de autores
 			case 2:
-				Autor autor;
-				//autor = buscarAutores();
+				buscarAutores();
 			
 				break;
 			// Busqueda de eventos
 			case 3:
-				Evento evento;
-				//evento = buscarEventos();
-				
+				buscarEventos();
 				break;
 	
 			default:
+				System.out.println("La opción insertada es incorrecta");
 				break;
 		}
 		
@@ -152,7 +201,7 @@ public class Inicio {
 		int op;
 		List<Object> librosBuscados;
 		
-		op= menuCriterioDeBusqueda();
+		op= menuCriterioDeBusquedaLibro();
 		switch (op) {
 			// Buscando por titulo
 			case 1:
@@ -161,8 +210,8 @@ public class Inicio {
 				break;
 			// Buscando por autor
 			case 2:
-			//	librosBuscados = Libro.buscarLibrosPorAutor(libros, pedirString("Autor a buscar"));
-			//	imprimirObjectos(librosBuscados);
+				librosBuscados = Libro.buscarLibrosPorAutor(libros, pedirString("Autor a buscar"));
+				imprimirObjectos(librosBuscados);
 				break;
 			// Buscando por fecha de publicacion
 			case 3:
@@ -185,21 +234,149 @@ public class Inicio {
 				librosBuscados = Libro.buscarLibrosPorEditorial(libros, pedirString("Editorial a buscar"));
 				imprimirObjectos(librosBuscados);	
 				break;
+				
+			default:
+				System.out.println("La opción insertada es incorrecta");
 			
 		}
 	}
+	
+	private static void buscarAutores() {
+		int op;
+		List<Object> autoresBuscados;
+		
+		op= menuCriterioDeBusquedaAutor();
+		switch (op) {
+			// Buscando por nombre
+			case 1:
+				autoresBuscados = Autor.buscarAutoresPorNombre(autores, pedirString("Titulo a buscar"));
+				imprimirObjectos(autoresBuscados);
+				break;
+			// Buscando por pais
+			case 2:
+				autoresBuscados = Autor.buscarAutorPorPais(autores, pedirString("Autor a buscar"));
+				imprimirObjectos(autoresBuscados);
+				break;
+			// Buscando por fecha de nacimiento
+			case 3:
+				boolean error = true;
+				while (error) {
+					try {
+						String fecha = pedirString("Fecha de nacimiento a buscar (YYYY-mm-dd)");
+						LocalDate.parse(fecha);
+						autoresBuscados = Autor.buscarAutorPorFecha(autores, fecha);
+						imprimirObjectos(autoresBuscados);
+						error = false;
+					} catch (DateTimeParseException e) {
+						System.out.println("******** ERROR. La fecha debe seguir el formato especificado **********");
+					}
+				}
+				
+				break;
+			default:
+				System.out.println("La opción insertada es incorrecta");
+		}
+	}
+	private static void buscarEventos() {
+		int op;
+		List<Object> eventosBuscados;
+		
+		op= menuCriterioDeBusquedaEvento();
+		switch (op) {
+			// Buscando por nombre
+			case 1:
+				eventosBuscados = Evento.buscarEventoPorNombre(eventos, pedirString("Nombre a buscar"));
+				imprimirObjectos(eventosBuscados);
+				break;
+			// Buscando por lugar
+			case 2:
+				eventosBuscados = Evento.buscarEventoPorLugar(eventos, pedirString("Evento a buscar"));
+				imprimirObjectos(eventosBuscados);
+				break;
+			// Buscando por fecha
+			case 3:
+				boolean error = true;
+				while (error) {
+					try {
+						String fecha = pedirString("Fecha de evento a buscar (YYYY-mm-dd)");
+						LocalDate.parse(fecha);
+						eventosBuscados = Evento.buscarEventoPorFecha(eventos, fecha);
+						imprimirObjectos(eventosBuscados);
+						error = false;
+					} catch (DateTimeParseException e) {
+						System.out.println("******** ERROR. La fecha debe seguir el formato especificado **********");
+					}
+				}
+				
+				break;
+			// Buscando por Libro
+			case 4:
+				eventosBuscados = Evento.buscarEventosPorLibro(eventos, pedirString("Editorial a buscar"));
+				imprimirObjectos(eventosBuscados);	
+				break;
+			default:
+				System.out.println("La opción insertada es incorrecta");
+		}
+	}
 
-	private static int menuCriterioDeBusqueda() {
+	private static int menuCriterioDeBusquedaLibro() {
+		int numero = -1;
+		
 		System.out.println("¿Qué criterio de busqueda quieres?");
 		System.out.println("1 .- Por titulo");
 		System.out.println("2 .- Por autor");
 		System.out.println("3 .- Por fecha de publicacion");
 		System.out.println("4 .- Por editorial");
 		System.out.println("0 .- Volver atrás");
-		
+		System.out.println("=====================================");
 		System.out.print(" - Elige una opción de untre las disponibles (0-4): ");
 		
-		return Integer.parseInt(reader.nextLine());
+		try {
+			numero = Integer.parseInt(reader.nextLine());
+		} catch (Exception e) {
+			System.out.print("La opcion introducida debe ser un numero");
+		}
+
+		return numero;
+	}
+	private static int menuCriterioDeBusquedaAutor() {
+		int numero = -1;
+		
+		System.out.println("¿Qué criterio de busqueda quieres?");
+		System.out.println("1 .- Por nombre completo");
+		System.out.println("2 .- Por pais");
+		System.out.println("3 .- Por fecha de nacimiento");
+		System.out.println("0 .- Volver atrás");
+		System.out.println("=====================================");
+		System.out.print(" - Elige una opción de untre las disponibles (0-4): ");
+				
+		try {
+			numero = Integer.parseInt(reader.nextLine());
+		} catch (Exception e) {
+			System.out.print("La opcion introducida debe ser un numero");
+		}
+
+		return numero;
+	}
+	private static int menuCriterioDeBusquedaEvento() {
+		int numero = -1;
+		
+		System.out.println("¿Qué criterio de busqueda quieres?");
+		System.out.println("1 .- Por nombre");
+		System.out.println("2 .- Por lugar");
+		System.out.println("3 .- Por fecha");
+		System.out.println("4 .- Por libro");
+		System.out.println("0 .- Volver atrás");
+		System.out.println("=====================================");
+		System.out.print(" - Elige una opción de untre las disponibles (0-4): ");
+		
+		try {
+			numero = Integer.parseInt(reader.nextLine());
+		} catch (Exception e) {
+			System.out.print("La opcion introducida debe ser un numero");
+		}
+
+		return numero;
 	}
 
 	private static void insertarElementos() {
@@ -222,7 +399,7 @@ public class Inicio {
 		case 2:
 			Autor autor;
 			autor = pedirDatosNuevoAutor();
-			autores.add(autores);
+			autores.add(autor);
 			break;
 		case 3:
 			Evento evento;
@@ -231,6 +408,7 @@ public class Inicio {
 			break;
 
 		default:
+			System.out.println("La opción insertada es incorrecta");
 			break;
 		}
 		
@@ -243,8 +421,9 @@ public class Inicio {
 		String nombre = pedirString("Nombre");
 		String lugar = pedirString("Lugar");
 		String fecha = pedirFecha("Fecha (YYYY-mm-dd)");
-		
-		return new Evento(nombre, lugar, fecha);
+		Libro libro = pedirDatosNuevoLibro();
+		libros.add(libro);
+		return new Evento(nombre, lugar, fecha, libro);
 	}
 
 	private static Autor pedirDatosNuevoAutor() {
@@ -252,7 +431,7 @@ public class Inicio {
 		System.out.println("===========================================================================");
 		
 		String nombreCompleto = pedirString("Nombre completo");
-		String fechaNacimiento = pedirFecha("Fecha de nacimiento (YYY-mm-dd)");
+		String fechaNacimiento = pedirFecha("Fecha de nacimiento (YYYY-mm-dd)");
 		String pais = pedirString("Pais");
 		
 		return new Autor(nombreCompleto, fechaNacimiento, pais);
@@ -265,8 +444,9 @@ public class Inicio {
 		String titulo = pedirString("Titulo");
 		String editorial = pedirString("Editorial");
 		String fecha = pedirFecha("Fecha de publicación (YYYY-mm-dd)");
-		
-		return new Libro(titulo, editorial, fecha);
+		Autor autor = pedirDatosNuevoAutor();
+		autores.add(autor);
+		return new Libro(titulo, editorial, fecha, autor);
 	}
 
 	private static void modificarDatosLibro(Libro libroAModificar) {
@@ -289,19 +469,21 @@ public class Inicio {
 	
 	private static String pedirFecha(String string) {
 		boolean fechaOk = false;
+		String stringFecha = "";
 		
 		do {
-			System.out.println(string + ": ");
-			string = reader.nextLine();
+			System.out.print(string + ": ");
+			stringFecha = reader.nextLine();
 			try {
-				LocalDate.parse(string);
+				LocalDate.parse(stringFecha);
+				fechaOk = true;
 			} catch (DateTimeParseException e) {
-				// TODO: handle exception
+				System.out.println("La fecha introducida es incorrecta, vuelve a intentarlo");
 			}
 			
 		} while (!fechaOk);
 		
-		return string;
+		return stringFecha;
 	}
 
 	private static String pedirString() {
@@ -309,11 +491,11 @@ public class Inicio {
 	}
 
 	private static String pedirString(String string) {
-		String cadena;
+		String cadena = "";
 		do {
 			System.out.print(string + ": ");
 			cadena = reader.nextLine();
-		} while ((cadena == null) && (cadena.equals("")));
+		} while ((cadena == null) || (cadena.equals("")));
 		
 		return cadena;
 	}
@@ -357,11 +539,9 @@ public class Inicio {
 			n = pedirNumeroDeElemento();
 			Evento eventoAModificar = (Evento) eventos.get(n);
 			modificarDatosEvento(eventoAModificar);
-			
-
-		break;
-
+			break;
 		default:
+			System.out.println("La opción insertada es incorrecta");
 			break;
 		}
 		
@@ -413,9 +593,17 @@ public class Inicio {
 	}
 
 	private static int pedirNumeroDeElemento() {
+		int numero = -1;
+			
 		System.out.print("¿Que numero de elemento quieres modificar? ");
 
-		return Integer.parseInt(reader.nextLine());
+		try {
+			numero = Integer.parseInt(reader.nextLine());
+		} catch (Exception e) {
+			System.out.print("La opcion introducida debe ser un numero");
+		}
+
+		return numero;
 	}
 
 	private static void eliminarElementos() {
@@ -449,6 +637,7 @@ public class Inicio {
 		break;
 
 		default:
+			System.out.println("La opción insertada es incorrecta");
 			break;
 		}
 		
@@ -466,6 +655,7 @@ public class Inicio {
 	}
 
 	private static void visualizarElemento(int op) {
+		System.out.println();
 		switch (op) {
 			case 1:
 				System.out.println("Mostrando todos los libros (" + libros.size() + ") cargados en memoria");
@@ -485,7 +675,8 @@ public class Inicio {
 				imprimirObjectos(eventos);
 				break;
 
-		default:
+			default:
+				System.out.println("La opción insertada es incorrecta");
 			break;
 		}
 		
@@ -495,6 +686,10 @@ public class Inicio {
 	{
 		Object o;
 		int contador = 0;
+		
+		if (objetos.size() == 0) {
+			System.out.println("No hay elementos para mostrar");
+		}
 		
 		for (Iterator i = objetos.iterator(); i.hasNext();) {
 			o = (Object) i.next();

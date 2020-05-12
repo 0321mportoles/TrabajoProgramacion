@@ -6,30 +6,33 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Libro {
+public class Libro extends Object{
 	
 	// atributos 
 	private String titulo;
 	private String editorial;
 	private LocalDate publicacion;
 	private int paginas;
+	private Autor autor;
 	
 	// constructor sin paginas
-	public Libro(String titulo, String editorial, String publicacion)
+	public Libro(String titulo, String editorial, String publicacion, Autor autor)
 	{
 		this.titulo = titulo;
 		this.editorial = editorial;
 		this.publicacion = LocalDate.parse(publicacion);
 		this.paginas = 0;
+		this.autor = autor;
 	}
 	
 	// constructor completo
-	public Libro(String titulo, String editorial, String publicacion, int paginas)
+	public Libro(String titulo, String editorial, String publicacion, int paginas, Autor autor)
 	{
 		this.titulo = titulo;
 		this.editorial = editorial;
 		this.publicacion = LocalDate.parse(publicacion);
 		this.paginas = paginas;
+		this.autor = autor;
 	}	
 
 	public String getEditorial()
@@ -52,6 +55,10 @@ public class Libro {
 		return this.paginas;
 	}
 
+	public Autor getAutor() {
+		return autor;
+	}
+
 	public void setEditorial(String value)
 	{
 		this.editorial = value;
@@ -72,6 +79,10 @@ public class Libro {
 		this.paginas = value;
 	}
 
+	public void setAutor(Autor autor) {
+		this.autor = autor;
+	}
+
 	public String toString() 
 	{
 		return 
@@ -79,41 +90,9 @@ public class Libro {
 				+ "\n\tTitulo: " + this.getTitulo() 
 				+ "\n\tEditorial: " + this.getEditorial() 
 				+ "\n\tFecha de publicacion: " + this.getPublicacion().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-				+ "\n\tNº de páginas: " + (this.getPaginas() == 0? "N/D": this.getPaginas())  
+				+ "\n\tNº de páginas: " + (this.getPaginas() == 0? "N/D": this.getPaginas())
+				+ "\n\tAutor: " + this.getAutor().getNombreCompleto()
 			+ "\n )";
-	}
-	
-	public static List<Object> loadDefaultObjects()
-	{
-		List<Object> libros = new ArrayList<Object>();
-		
-		libros.add(new Libro("La historia interminable", "ALFAGUARA", "1979-09-01"));
-		libros.add(new Libro("Trampa 22", "Literatura Random House", "1979-09-01")); // Joseph Heller
-		libros.add(new Libro("De corazones y cerebros", "Baile del Sol", "1979-09-01", 644)); // César Martín Ortiz
-		libros.add(new Libro("Monjas y Soldados", "Impedimenta", "1979-09-01", 600)); // Iris Murdoch
-		libros.add(new Libro("Memorias de un antihéroe", "Las afueras", "1979-09-01", 128)); // Kornel Filipowicz 
-		libros.add(new Libro("La costa de Chicago", "Pálido Fuego", "1979-09-01", 189)); // Stuart Dybek
-		libros.add(new Libro("Los errantes", "Anagrama", "1979-09-01",400)); // Olga Tokarczuk
-		libros.add(new Libro("Un apartamento en Urano. Crónicas del cruce", "Anagrama", "1979-09-01", 320)); // Paul B. Preciado 
-		libros.add(new Libro("Lagunas", "Pepitas de Calabaza", "1979-09-01", 256)); // Sarah Hepola
-		libros.add(new Libro("Milkman", "Alianza de Novelas", "1979-09-01", 352)); // Anna Burns 
-		libros.add(new Libro("El quijote", "Juan de la Cuesta", "1605-01-01")); // Miguel de Cervantes
-		
-//		Libro[] libros = {
-//				new Libro("La historia interminable", "ALFAGUARA", "1979-09-01"),
-//				new Libro("Trampa 22", "Literatura Random House", "1979-09-01"), // Joseph Heller
-//				new Libro("De corazones y cerebros", "Baile del Sol", "1979-09-01", 644), // César Martín Ortiz
-//				new Libro("Monjas y Soldados", "Impedimenta", "1979-09-01", 600), // Iris Murdoch
-//				new Libro("Memorias de un antihéroe", "Las afueras", "1979-09-01", 128), // Kornel Filipowicz 
-//				new Libro("La costa de Chicago", "Pálido Fuego", "1979-09-01", 189), // Stuart Dybek
-//				new Libro("Los errantes", "Anagrama", "1979-09-01",400), // Olga Tokarczuk
-//				new Libro("Un apartamento en Urano. Crónicas del cruce", "Anagrama", "1979-09-01", 320), // Paul B. Preciado 
-//				new Libro("Lagunas", "Pepitas de Calabaza", "1979-09-01, 256"), // Sarah Hepola
-//				new Libro("Milkman", "Alianza de Novelas", "1979-09-01", 352), // Anna Burns 
-//				new Libro("El quijote", "Juan de la Cuesta", "1605-01-01"), // Miguel de Cervantes
-//		};
-//		
-		return libros;
 	}
 	
 	public static List<Object> buscarLibrosPorTitulo(List<Object> lista, String buscando) {
@@ -138,7 +117,7 @@ public class Libro {
 			o = (Object) i.next();
 			if (((Libro) o).getEditorial().toLowerCase().contains(buscando.toLowerCase())) {
 				libros.add(o);
-			}
+			} 
 		}
 		
 		return libros;
@@ -157,5 +136,80 @@ public class Libro {
 		
 		return libros;
 	}
+
+	public static List<Object> buscarLibrosPorAutor(List<Object> lista, String buscando) {
+		List<Object> libros = new ArrayList<Object>();
+		Object o;
+		System.out.println("Buscando libro por autor que contenga: '" + buscando + "'");
+		for (Iterator<Object> i = lista.iterator(); i.hasNext();) {
+			o = (Object) i.next();
+			if (((Libro) o).getAutor().getNombreCompleto().toLowerCase().contains(buscando.toLowerCase())) {
+				libros.add(o);
+			} 
+		}
+		
+		return libros;
+	}
 	
+	public String escribirAFicheroDeTexto() {
+		return 
+				this.getTitulo() + "," 
+				+ this.getEditorial() + "," 
+				+ this.getPublicacion() + "," 
+				+ this.getPaginas() + "," 
+				+ this.getAutor().getNombreCompleto();	
+	}
+
+	public static Libro leerDesdeLineaDeTexto(String linea, List<Object> autores) throws Exception {
+		String titulo = "", editorial = "", publicacion = "";
+		int paginas = 0;
+		Autor autor;
+		List<Object> listadoAutores = null;
+		
+		int  pInicio = 0, pFinal = 0;
+		int i = 0;
+		
+		pFinal = linea.indexOf(',');
+		System.out.println("Buscando " + i + " coma");
+		if (pFinal != -1) {
+			while (pFinal != -1) {
+				String palabra = linea.substring(pInicio, pFinal);
+				System.out.println("Palabra extraida: " + palabra);
+				pInicio = pFinal + 1;
+				pFinal = linea.indexOf(',', pInicio);
+				
+				if (i == 0) {
+					titulo = palabra;
+				} else if (i == 1) {
+					editorial = palabra;
+				} else if (i == 2) {
+					publicacion = palabra;
+				} else if (i == 3) {
+					paginas = Integer.parseInt(palabra);
+				}
+				i++;
+				System.out.println("Buscando " + i + " coma");
+				System.out.println("p inicio: " + pInicio + " pFinal: " + pFinal);
+			}
+			
+			String palabra = linea.substring(pInicio);
+			
+			listadoAutores = Autor.buscarAutoresPorNombre(autores, palabra);
+			
+			if (listadoAutores.size() != 1) {
+				if (listadoAutores.size() == 0) {
+					throw new Exception("El autor " + palabra + " no ha sido creado previamente");
+				} else {
+					throw new Exception("Hay " + listadoAutores.size() + " autores que coinciden con la busqueda '" + palabra + "'");
+				}
+			}
+		}
+		
+		if (i != 4) {
+			throw new Exception("La linea de fichero no está bien formada");
+		}
+		
+		return new Libro(titulo, editorial, publicacion, paginas, (Autor) listadoAutores.get(0));
+	}
+
 }
