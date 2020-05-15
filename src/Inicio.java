@@ -686,7 +686,10 @@ public class Inicio {
 		}
 		
 	}
-	
+	/**
+	 * 
+	 * @param objetos Los objetos a imprimir por pantalla
+	 */
 	private static void imprimirObjectos(List<Object> objetos)
 	{
 		Object o;
