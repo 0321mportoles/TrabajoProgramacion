@@ -1,6 +1,5 @@
 // Learn more: https://www.baeldung.com/java-8-date-time-intro
 import java.time.*;
-import java.time.chrono.ChronoLocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -171,7 +170,6 @@ public class Libro extends Object {
 	public static Libro leerDesdeLineaDeTexto(String linea, List<Object> autores) throws Exception {
 		String titulo = "", editorial = "", publicacion = "";
 		int paginas = 0;
-		Autor autor;
 		List<Object> listadoAutores = null;
 		
 		int  pInicio = 0, pFinal = 0;

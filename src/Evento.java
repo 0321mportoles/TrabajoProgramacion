@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.time.*;
-import java.time.format.DateTimeFormatter;
 
 public class Evento extends Object {
 	
@@ -124,7 +123,6 @@ public class Evento extends Object {
 
 	public static Evento leerDesdeLineaDeTexto(String linea, List<Object> libros) throws Exception {
 		String nombre = "", lugar = "", fecha= "";
-		Libro libro;
 		List<Object> listadoLibros = null;
 		
 		int  pInicio = 0, pFinal = 0;

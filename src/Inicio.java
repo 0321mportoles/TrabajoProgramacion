@@ -476,10 +476,6 @@ public class Inicio {
 		return stringFecha;
 	}
 
-	private static String pedirString() {
-		return pedirString("Introduce una cadena de texto: ");
-	}
-
 	private static String pedirString(String string) {
 		String cadena = "";
 		do {
@@ -597,20 +593,6 @@ public class Inicio {
 		
 	}
 
-	private static int pedirNumeroDeElemento() {
-		int numero = -1;
-			
-		System.out.print("¿Que numero de elemento quieres modificar? ");
-
-		try {
-			numero = Integer.parseInt(reader.nextLine());
-		} catch (Exception e) {
-			System.out.print("La opcion introducida debe ser un numero");
-		}
-
-		return numero;
-	}
-
 	private static void eliminarElementos() {
 		int op;
 		
@@ -622,7 +604,6 @@ public class Inicio {
 	}	
 
 	private static void eliminarElemento(int op) {
-		int n;
 		List<Object> buscados;
 		String buscando;
 		
@@ -706,7 +687,7 @@ public class Inicio {
 		
 	}
 	
-	private static void imprimirObjectos(List <Object> objetos)
+	private static void imprimirObjectos(List<Object> objetos)
 	{
 		Object o;
 		int contador = 0;
@@ -715,7 +696,7 @@ public class Inicio {
 			System.out.println("No hay elementos para mostrar");
 		}
 		
-		for (Iterator i = objetos.iterator(); i.hasNext();) {
+		for (Iterator<Object> i = objetos.iterator(); i.hasNext();) {
 			o = (Object) i.next();
 			System.out.println(contador++ + " " + o);
 		}

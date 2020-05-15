@@ -78,11 +78,7 @@ public class Autor extends Object {
 				autores.add(o);
 			}
 		}
-		
-		for (Object object : autores) {
-			
-		}
-		
+
 		return autores;
 	}
 	

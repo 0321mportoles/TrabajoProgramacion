@@ -1,9 +1,4 @@
-import java.awt.font.NumericShaper;
 import java.io.*;
-import java.time.chrono.ChronoLocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class Importar {
@@ -26,7 +21,7 @@ public class Importar {
 				numeroDeAutores = Integer.parseInt(linea);
 			}
 			
-			/* Importando autores */
+			// Importando autores 
 			while (numeroDeAutores > 0 && (linea = fic.readLine()) != null) { //se va leyendo un carácter
 				Autor autor = Autor.leerDesdeLineaDeTexto(linea);
 				autores.add(autor);
@@ -38,7 +33,7 @@ public class Importar {
 				numeroDeLibros= Integer.parseInt(linea);
 			}
 			
-			/* Importando libros */
+			// Importando libros 
 			while (numeroDeLibros > 0 && (linea = fic.readLine()) != null) { 
 				Libro libro = Libro.leerDesdeLineaDeTexto(linea, autores);
 				libros.add(libro);
@@ -50,7 +45,7 @@ public class Importar {
 			if (linea != null) {
 				numeroDeEventos= Integer.parseInt(linea);
 			}
-			/* Importando eventos */
+			// Importando eventos 
 			while (numeroDeEventos > 0 && (linea = fic.readLine()) != null) {
 				Evento evento = Evento.leerDesdeLineaDeTexto(linea, libros);
 				eventos.add(evento);
@@ -87,11 +82,12 @@ public class Importar {
 	    eventos.clear();
 	    
 		try {
+			@SuppressWarnings("resource")
 			DataInputStream fic = new
 	                  DataInputStream(new FileInputStream(fichero));
 			
 			numeroDeAutores = fic.readInt();
-			/* Importando autores */
+			// Importando autores 
 			while (numeroDeAutores > 0) { 
 				Autor autor = new Autor(
 						fic.readUTF(), 
@@ -103,7 +99,7 @@ public class Importar {
 			}
 			
 			numeroDeLibros = fic.readInt();
-			/* Importando libros */
+			// Importando libros 
 			while (numeroDeLibros > 0 ) { 
 				String titulo = fic.readUTF(); 
 				String editorial = fic.readUTF();
@@ -127,7 +123,7 @@ public class Importar {
 			
 			numeroDeEventos = fic.readInt();
 			System.out.println("Eventos detectados: " + numeroDeEventos);
-			/* Importando eventos */
+			// Importando eventos 
 			while (numeroDeEventos > 0) {
 				String nombre 		= fic.readUTF(); 
 				String lugar 		= fic.readUTF(); 
@@ -185,7 +181,7 @@ public class Importar {
 			posicion += 4;
 
 			System.out.println("Importando (" + numeroDeAutores + ") autores");
-			/* Importando autores */
+			// Importando autores 
 			while (numeroDeAutores > 0) {
 				cadena1 = leerCadenaDeFichero(fic, Autor.LONGITUD_MAX_CADENA);
 				fecha = leerCadenaDeFichero(fic, Autor.LONGITUD_MAX_FECHA);
@@ -200,22 +196,22 @@ public class Importar {
 			int numeroDeLibros = fic.readInt();
 			System.out.println("Importando (" + numeroDeLibros + ") libros");
 			posicion += 4;
-			/* Importando libros */
+			// Importando libros 
 			while (numeroDeLibros > 0 ) { 
-				/* Leo Titulo del libro */
+				// Leo Titulo del libro 
 				cadena1 = leerCadenaDeFichero(fic, Libro.LONGITUD_MAX_CADENA);
-				/* Leo Editorial*/
+				// Leo Editorial
 				cadena2 = leerCadenaDeFichero(fic, Libro.LONGITUD_MAX_CADENA);
-				/* Leo Fecha de publicación*/
+				// Leo Fecha de publicación
 				fecha = leerCadenaDeFichero(fic, Libro.LONGITUD_MAX_FECHA);
-				/* Leo el número de paginas */
+				// Leo el número de paginas 
 				entero = fic.readInt();
-				/* Leo el NOMBRE del Autor relacionado con el libro */
+				// Leo el NOMBRE del Autor relacionado con el libro 
 				cadena3 = leerCadenaDeFichero(fic, Libro.LONGITUD_MAX_CADENA);				
-				/* BUSCO el autor de mi listado de autores*/
+				// BUSCO el autor de mi listado de autores
 				List<Object> listadoAutores = Autor.buscarAutoresPorNombre(autores, cadena3);
 				
-				/* Me aseguro de que solo encuentro un autor con ese nombre */
+				// Me aseguro de que solo encuentro un autor con ese nombre 
 				if (listadoAutores.size() != 1) {
 					if (listadoAutores.size() == 0) {
 						throw new Exception("El autor " + cadena3 + " no ha sido creado previamente");
@@ -224,14 +220,14 @@ public class Importar {
 					}
 				}
 				
-				/* Creo mi libro */
+				// Creo mi libro 
 				Libro libro = new Libro(cadena1, cadena2, fecha, entero, (Autor) listadoAutores.get(0));
 				
-				/* Añado el libro creado a mi lista de libros */
+				// Añado el libro creado a mi lista de libros 
 				libros.add(libro);
-				/* Resto el número de libros que quedan por leer*/
+				// Resto el número de libros que quedan por leer
 				numeroDeLibros--;
-				/* Actualizo la posición del puntero que debe apuntar en el próximo elemento*/
+				// Actualizo la posición del puntero que debe apuntar en el próximo elemento
 				posicion= posicion + Libro.LONGITUD_MAX_OBJ_BYTES;
 				fic.seek(posicion);
 			}
@@ -239,7 +235,7 @@ public class Importar {
 			int numeroDeEventos = fic.readInt();
 			posicion += 4;
 			System.out.println("Importando " + numeroDeEventos + " eventos");
-			/* Importando eventos */
+			// Importando eventos 
 			while (numeroDeEventos > 0) {
 				cadena1 = leerCadenaDeFichero(fic, Evento.LONGITUD_MAX_CADENA);
 				cadena2 = leerCadenaDeFichero(fic, Evento.LONGITUD_MAX_CADENA);
