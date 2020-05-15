@@ -5,10 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * @author MARTA
- *
- */
+
 public class Inicio {
 
 	public static Scanner reader = new Scanner(System.in);
@@ -16,15 +13,9 @@ public class Inicio {
 	public static List<Object> autores = new ArrayList<Object>();
 	public static List<Object> eventos = new ArrayList<Object>();
 	
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		int opcion;
-		
 
-		System.out.println();
-		
 		do {
 			opcion = mostrarMenuPrincipal();
 			ejecutarOpciones(opcion);
@@ -38,9 +29,9 @@ public class Inicio {
 	private static int mostrarMenuPrincipal() {
 		int numero = -1;
 		System.out.println();
-		System.out.println("=======================================================================================");
-		System.out.println("                          TRABAJO PROGRAMACIÓN CURSO 2019-2020                         ");
-		System.out.println("=======================================================================================");
+		System.out.println("===============================================");
+		System.out.println("     TRABAJO PROGRAMACIÓN CURSO 2019-2020      ");
+		System.out.println("===============================================");
 		System.out.println("1 .- Insertar elementos");
 		System.out.println("2 .- Realizar búsqueda");
 		System.out.println("3 .- Modificar elemento");
@@ -53,17 +44,16 @@ public class Inicio {
 		System.out.println("10 .- Importación utilizando acceso aleatorio");
 		System.out.println("11 .- Exportación utilizando acceso aleatorio");
 		System.out.println("0 .- Salir del programa");
-		System.out.println("=======================================================================================");
+		System.out.println("===============================================");
 		System.out.print("Elija una opción de las anteriores (0 para salir): ");
 		
 		try {
 			numero = Integer.parseInt(reader.nextLine());
 		} catch (Exception e) {
-			System.out.print("La opcion introducida debe ser un numero");
+			System.out.println("***** Error: La opcion introducida debe ser un numero");
 		}
 
 		return numero;
-			
 	}
 	
 	private static int menuElementos() {
@@ -74,13 +64,13 @@ public class Inicio {
 		System.out.println("2 .- Autor");
 		System.out.println("3 .- Evento de un libro");
 		System.out.println("0 .- Volver atrás");
-		System.out.println("===================================================");
-		System.out.print(" - Elige una opción de untre las disponibles (0-3): ");
+		System.out.println("=============================================");
+		System.out.print(" - Elige una opción de las disponibles (0-3): ");
 		
 		try {
 			numero = Integer.parseInt(reader.nextLine());
 		} catch (Exception e) {
-			System.out.print("La opcion introducida debe ser un numero");
+			System.out.println("La opcion introducida debe ser un numero");
 		}
 
 		return numero;
@@ -94,7 +84,6 @@ public class Inicio {
 				break;
 			case 2:
 				buscarElementos();
-				
 				break;
 			case 3:
 				modificarElementos();
@@ -106,52 +95,52 @@ public class Inicio {
 				visualizarElementos();
 				break;
 			case 6:
-				System.out.println("Importando a fichero de TEXTO");
+				System.out.println("Importando a fichero modo: TEXTO");
 				if (Importar.importarDeFicheroTexto(autores, libros, eventos)) {
 					System.out.println("El fichero ha sido importado correctamente");
 				} else {
-					System.out.println("Ha habido un error en la importación");
+					System.out.println("*****ERROR***** Ha habido un error en la importación");
 				}
 				break;
 			case 7:
-				System.out.println("Exportando a fichero de TEXTO");
+				System.out.println("Exportando a fichero modo: TEXTO");
 				if (Exportar.exportarAFicheroTexto(autores, libros, eventos)) {
 					System.out.println("El fichero ha sido exportado correctamente");
 				} else {
-					System.out.println("Ha habido un error en la exportación");
+					System.out.println("*****ERROR***** Ha habido un error en la exportación");
 				}
 				break;
 			case 8:
-				System.out.println("Importando a fichero BINARIO");
+				System.out.println("Importando a fichero modo: BINARIO");
 				if (Importar.importarDeFicheroBinario(autores, libros, eventos)) {
 					System.out.println("El fichero ha sido importado correctamente");
 				} else {
-					System.out.println("Ha habido un error en la importación");
+					System.out.println("*****ERROR***** Ha habido un error en la importación");
 				}
 				break;
 			case 9:
-				System.out.println("Exportando a fichero BINARIO");
+				System.out.println("Exportando a fichero modo: BINARIO");
 				if (Exportar.exportarAFicheroBinario(autores, libros, eventos)) {
 					System.out.println("El fichero ha sido exportado correctamente");
 				} else {
-					System.out.println("Ha habido un error en la exportación");
+					System.out.println("*****ERROR***** Ha habido un error en la exportación");
 				}
 				break;
-//			case 10:
-//				System.out.println("Importando a fichero Acceso Aleatorio");
-//				if (Importar.importarDeFicheroDeAccesoAleatorio(autores, libros, eventos)) {
-//					System.out.println("El fichero ha sido importado correctamente");
-//				} else {
-//					System.out.println("Ha habido un error en la importación");
-//				}
-//				break;
+			case 10:
+				System.out.println("Importando a fichero modo: Acceso Aleatorio");
+				if (Importar.importarDeFicheroDeAccesoAleatorio(autores, libros, eventos)) {
+					System.out.println("El fichero ha sido importado correctamente");
+				} else {
+					System.out.println("*****ERROR***** Ha habido un error en la importación");
+				}
+				break;
 			
 			case 11:
-				System.out.println("Exportando a fichero Acceso Aleatorio");
+				System.out.println("Exportando a fichero modo: Acceso Aleatorio");
 			if (Exportar.exportarAFicheroDeAccesoAleatorio(autores, libros, eventos)) {
 				System.out.println("El fichero ha sido exportado correctamente");
 			} else {
-				System.out.println("Ha habido un error en la exportación");
+				System.out.println("*****ERROR***** Ha habido un error en la exportación");
 			}
 				break;
 			case 0:
@@ -166,7 +155,7 @@ public class Inicio {
 		int op;
 		
 		System.out.println("¿Que tipo de elemento quieres buscar?");
-		System.out.println("=====================================");
+		System.out.println("=============================================");
 		
 		op = menuElementos();
 		buscarElemento(op);
@@ -328,8 +317,8 @@ public class Inicio {
 		System.out.println("3 .- Por fecha de publicacion");
 		System.out.println("4 .- Por editorial");
 		System.out.println("0 .- Volver atrás");
-		System.out.println("=====================================");
-		System.out.print(" - Elige una opción de untre las disponibles (0-4): ");
+		System.out.println("=============================================");
+		System.out.print(" - Elige una opción de las disponibles (0-4): ");
 		
 		try {
 			numero = Integer.parseInt(reader.nextLine());
@@ -347,8 +336,8 @@ public class Inicio {
 		System.out.println("2 .- Por pais");
 		System.out.println("3 .- Por fecha de nacimiento");
 		System.out.println("0 .- Volver atrás");
-		System.out.println("=====================================");
-		System.out.print(" - Elige una opción de untre las disponibles (0-4): ");
+		System.out.println("=============================================");
+		System.out.print(" - Elige una opción de las disponibles (0-4): ");
 				
 		try {
 			numero = Integer.parseInt(reader.nextLine());
@@ -367,8 +356,8 @@ public class Inicio {
 		System.out.println("3 .- Por fecha");
 		System.out.println("4 .- Por libro");
 		System.out.println("0 .- Volver atrás");
-		System.out.println("=====================================");
-		System.out.print(" - Elige una opción de untre las disponibles (0-4): ");
+		System.out.println("=============================================");
+		System.out.print(" - Elige una opción de las disponibles (0-4): ");
 		
 		try {
 			numero = Integer.parseInt(reader.nextLine());
@@ -383,7 +372,7 @@ public class Inicio {
 		int op;
 		
 		System.out.println("¿Que elemento quieres insertar?");
-		System.out.println("===========================================================================");
+		System.out.println("=============================================");
 		
 		op = menuElementos();
 		insertarElemento(op);
@@ -406,7 +395,8 @@ public class Inicio {
 			evento = pedirDatosNuevoEvento();
 			eventos.add(evento);
 			break;
-
+//		case 0:
+//			break;
 		default:
 			System.out.println("La opción insertada es incorrecta");
 			break;
@@ -416,7 +406,7 @@ public class Inicio {
 
 	private static Evento pedirDatosNuevoEvento() {
 		System.out.println("Insertar nuevo Evento");
-		System.out.println("===========================================================================");
+		System.out.println("=============================================");
 		
 		String nombre = pedirString("Nombre");
 		String lugar = pedirString("Lugar");
@@ -428,8 +418,8 @@ public class Inicio {
 
 	private static Autor pedirDatosNuevoAutor() {
 		System.out.println("Insertar nuevo autor");
-		System.out.println("===========================================================================");
-		
+		System.out.println("=============================================");
+
 		String nombreCompleto = pedirString("Nombre completo");
 		String fechaNacimiento = pedirFecha("Fecha de nacimiento (YYYY-mm-dd)");
 		String pais = pedirString("Pais");
@@ -439,8 +429,8 @@ public class Inicio {
 
 	private static Libro pedirDatosNuevoLibro() {
 		System.out.println("Insertar nuevo libro");
-		System.out.println("===========================================================================");
-		
+		System.out.println("=============================================");
+
 		String titulo = pedirString("Titulo");
 		String editorial = pedirString("Editorial");
 		String fecha = pedirFecha("Fecha de publicación (YYYY-mm-dd)");
@@ -513,38 +503,53 @@ public class Inicio {
 		int op;
 		
 		System.out.println("¿Que elemento quieres modificar?");
-		System.out.println("===========================================================================");
+		System.out.println("=============================================");
 		
 		op = menuElementos();
 		modificarElemento(op);
 	}	
 
 	private static void modificarElemento(int op) {
-		int n;
+		String buscando;
+		List<Object> buscados;
 		switch (op) {
 		case 1:
-			n = pedirNumeroDeElemento();
-			Libro libroAModificar = (Libro) libros.get(n);
-			modificarDatosLibro(libroAModificar);
-
+			//buscando por libro
+			buscando = pedirString("Titulo del libro a modificar");
+			buscados = Libro.buscarLibrosPorTitulo(libros, buscando);
+			for (Object libro: buscados) {
+				
+				Libro libroAModificar = (Libro) libros.get(0);
+				modificarDatosLibro(libroAModificar);
+				System.out.println("El libro '" + ((Libro) libro).getTitulo() + "' se ha modificado correctamente");
+			}
+			
 			break;
 		case 2:
-			
-			n = pedirNumeroDeElemento();
-			Autor autorAModificar = (Autor) autores.get(n);
-			modificarDatosAutor(autorAModificar);
-
+			//buscando por autor
+			buscando = pedirString("Nombre del autor a modificar");
+			buscados = Autor.buscarAutoresPorNombre(autores, buscando);
+			for (Object autor: buscados) {
+				Autor autorAModificar = (Autor) autores.get(0);
+				modificarDatosAutor(autorAModificar);
+				System.out.println("El autor '" + ((Autor) autor).getNombreCompleto() + "' se ha modificado correctamente");
+			}
 			break;
 		case 3:
-			n = pedirNumeroDeElemento();
-			Evento eventoAModificar = (Evento) eventos.get(n);
-			modificarDatosEvento(eventoAModificar);
+			//buscando por evento
+			buscando = pedirString("Nombre del evento a modificar");
+			buscados = Evento.buscarEventoPorNombre(eventos, buscando);
+			for (Object evento: buscados) {
+				Evento eventoAModificar = (Evento) eventos.get(0);
+				modificarDatosEvento(eventoAModificar);
+				
+				System.out.println("El evento '" + ((Evento) evento).getNombre() + "' se ha modificado correctamente");
+			}
 			break;
 		default:
 			System.out.println("La opción insertada es incorrecta");
 			break;
 		}
-		
 	}
 
 	private static void modificarDatosEvento(Evento eventoAModificar) {
@@ -618,23 +623,42 @@ public class Inicio {
 
 	private static void eliminarElemento(int op) {
 		int n;
+		List<Object> buscados;
+		String buscando;
+		
 		switch (op) {
 		case 1:
-			n = pedirNumeroDeElemento();
-			System.out.println("Borrando libro con titulo " + ((Libro) libros.get(n)).getTitulo());
-			Libro libroAEliminar = (Libro) libros.remove(n);
+			buscando = pedirString("Titulo del libro a borrar");
+			buscados = Libro.buscarLibrosPorTitulo(libros, buscando);
+			for (Object libro: buscados) {
+				for (Object evento : Evento.buscarEventosPorLibro(eventos, ((Libro) libro).getTitulo())) {
+					eventos.remove(evento);
+				}
+				libros.remove(libro);
+				System.out.println("El libro '" + ((Libro) libro).getTitulo() + "' se ha eliminado correctamente");
+			}
 			break;
 		case 2:
-			n = pedirNumeroDeElemento();
-			System.out.println("Borrando Autor " + ((Autor) autores.get(n)).getNombreCompleto());
-			Autor autorAEliminar = (Autor) autores.remove(n);
+			buscando = pedirString("Nombre del autor a borrar");
+			buscados = Autor.buscarAutoresPorNombre(autores, buscando);
+			for (Object autor: buscados) {
+				for (Object libro : Libro.buscarLibrosPorAutor(libros, buscando)) {
+					for (Object evento : Evento.buscarEventosPorLibro(eventos, ((Libro) libro).getTitulo())) {
+						eventos.remove(evento);
+					}
+					libros.remove(libro);
+				}
+				autores.remove(autor);
+				
+			}
 			break;
 		case 3:
-			n = pedirNumeroDeElemento();
-			System.out.println("Borrando Evento " + ((Evento) eventos.get(n)).getNombre());
-			Evento eventoAEliminar = (Evento) eventos.remove(n);
-				
-		break;
+			buscando = pedirString("Nombre del evento a borrar");
+			buscados = Evento.buscarEventoPorNombre(eventos, buscando);
+			for (Object evento: buscados) {
+				eventos.remove(evento);
+			}			
+			break;
 
 		default:
 			System.out.println("La opción insertada es incorrecta");
@@ -648,7 +672,7 @@ public class Inicio {
 		int op;
 		
 		System.out.println("¿Que elementos quieres visualizar?");
-		System.out.println("===========================================================================");
+		System.out.println("=============================================");
 		
 		op = menuElementos();
 		visualizarElemento(op);
@@ -659,19 +683,19 @@ public class Inicio {
 		switch (op) {
 			case 1:
 				System.out.println("Mostrando todos los libros (" + libros.size() + ") cargados en memoria");
-				System.out.println("===========================================================================");
+				System.out.println("=============================================");
 				imprimirObjectos(libros);
 				
 				break;
 			case 2:
 				System.out.println("Mostrando todos los autores (" + autores.size() + ") cargados en memoria");
-				System.out.println("===========================================================================");
+				System.out.println("=============================================");
 				imprimirObjectos(autores);
 				
 				break;
 			case 3:
 				System.out.println("Mostrando todos los eventos sobre libros (" + eventos.size() + ") cargados en memoria");
-				System.out.println("===========================================================================");
+				System.out.println("=============================================");
 				imprimirObjectos(eventos);
 				break;
 

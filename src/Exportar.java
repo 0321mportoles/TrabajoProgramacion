@@ -106,32 +106,53 @@ public class Exportar {
 		File fichero = new File("FicheroAccesoAleatorio.dat");	         
 		RandomAccessFile fic;
 		
-			
+		StringBuffer buffer = null;
 		try {
-			fic = new RandomAccessFile(fichero, "rw");	
+			fic = new RandomAccessFile(fichero, "rw");
 			fic.writeInt(autores.size());
 			for (Object autor : autores) {
-				fic.writeChars((((Autor) autor).getNombreCompleto()));
-				fic.writeChars(((Autor) autor).getFechaNacimiento().toString());
-				fic.writeChars(((Autor) autor).getPais());
+				buffer = new StringBuffer((((Autor) autor).getNombreCompleto()));      
+				buffer.setLength(Autor.LONGITUD_MAX_CADENA);
+				fic.writeChars(buffer.toString());
+				buffer = new StringBuffer(((Autor) autor).getFechaNacimiento().toString());
+				buffer.setLength(Autor.LONGITUD_MAX_FECHA);
+				fic.writeChars(buffer.toString());
+				buffer = new StringBuffer(((Autor) autor).getPais());      
+				buffer.setLength(Autor.LONGITUD_MAX_CADENA);
+				fic.writeChars(buffer.toString());
 			}
-				
 				
 			fic.writeInt(libros.size());
 			for (Object libro : libros) {
-				fic.writeChars(((Libro) libro).getTitulo());
-				fic.writeChars(((Libro) libro).getEditorial());
-				fic.writeChars(((Libro) libro).getPublicacion().toString());
-				fic.writeInt(((Libro) libro).getPaginas());
-				fic.writeChars(((Libro) libro).getAutor().getNombreCompleto());
+				buffer = new StringBuffer( ((Libro) libro).getTitulo() );      
+				buffer.setLength(Libro.LONGITUD_MAX_CADENA); 
+			    fic.writeChars(buffer.toString());
+		    	buffer = new StringBuffer( ((Libro) libro).getEditorial() );      
+		    	buffer.setLength(Libro.LONGITUD_MAX_CADENA); 
+			    fic.writeChars(buffer.toString());
+		    	buffer = new StringBuffer( ((Libro) libro).getPublicacion().toString() );      
+		    	buffer.setLength(Libro.LONGITUD_MAX_FECHA);
+			    fic.writeChars(buffer.toString());
+			    fic.writeInt(((Libro) libro).getPaginas());
+		    	buffer = new StringBuffer( ((Libro) libro).getAutor().getNombreCompleto() );      
+		    	buffer.setLength(Libro.LONGITUD_MAX_CADENA); 
+			    fic.writeChars(buffer.toString());
 			} 
 			
 			fic.writeInt(eventos.size());
 			for (Object evento : eventos)  {
-				fic.writeChars(((Evento) evento).getNombre());
-				fic.writeChars(((Evento) evento).getLugar());
-				fic.writeChars(((Evento) evento).getFecha().toString());
-				fic.writeChars(((Evento) evento).getLibro().getTitulo());
+				buffer = new StringBuffer(((Evento) evento).getNombre());      
+				buffer.setLength(Evento.LONGITUD_MAX_CADENA); 
+				fic.writeChars(buffer.toString());
+				buffer = new StringBuffer(((Evento) evento).getLugar());      
+				buffer.setLength(Evento.LONGITUD_MAX_CADENA); 
+				fic.writeChars(buffer.toString());
+				buffer = new StringBuffer(((Evento) evento).getFecha().toString());      
+				buffer.setLength(Evento.LONGITUD_MAX_FECHA);
+				fic.writeChars(buffer.toString());
+				buffer = new StringBuffer(((Evento) evento).getLibro().getTitulo());      
+				buffer.setLength(Evento.LONGITUD_MAX_CADENA); 
+				fic.writeChars(buffer.toString());
 			}
 				
 			fic.close();
@@ -143,10 +164,5 @@ public class Exportar {
 		} 
 		
 		return true;			
-
-	
-
 	}
-
-
 }

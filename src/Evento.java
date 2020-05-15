@@ -4,7 +4,12 @@ import java.util.List;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
-public class Evento {
+public class Evento extends Object {
+	
+	// Constantes
+	public static final Integer LONGITUD_MAX_CADENA = 30;
+	public static final Integer LONGITUD_MAX_FECHA = 10;
+	public static final int LONGITUD_MAX_OBJ_BYTES = 200;
 	
 	// atributos
 	private String nombre;
@@ -126,11 +131,10 @@ public class Evento {
 		int i = 0;
 		
 		pFinal = linea.indexOf(',');
-		System.out.println("Buscando " + i + " coma");
+		
 		if (pFinal != -1) {
 			while (pFinal != -1) {
-				String palabra = linea.substring(pInicio, pFinal);
-				System.out.println("Palabra extraida: " + palabra);
+				String palabra = linea.substring(pInicio, pFinal).trim();
 				pInicio = pFinal + 1;
 				pFinal = linea.indexOf(',', pInicio);
 				
@@ -143,11 +147,9 @@ public class Evento {
 				}
 				
 				i++;
-				System.out.println("Buscando " + i + " coma");
-				System.out.println("p inicio: " + pInicio + " pFinal: " + pFinal);
 			}
 			
-			String palabra = linea.substring(pInicio);
+			String palabra = linea.substring(pInicio).trim();
 			
 			listadoLibros = Libro.buscarLibrosPorTitulo(libros, palabra);
 			

@@ -1,5 +1,112 @@
-1
+108
 Elisabeth Benavent,1965-05-05,España
+Miguel de Cervantes, 1550-05-05,España
+Luciano G. Egido, 1960-06-08,Desconocido
+Benjamin G. Martin, 1960-06-08,Desconocido
+Melania G. Mazzucco, 1960-06-08,Desconocido
+Stanley G. Payne, 1960-06-08,Desconocido
+Carlos G. Reigosa, 1960-06-08,Desconocido
+William G. Tierney, 1960-06-08,Desconocido
+Jostein Gaarder, 1960-06-08,Desconocido
+Ángel Gabilondo, 1960-06-08,Desconocido
+Markus Gabriel, 1960-06-08,Desconocido
+Pere Gabriel (ed.), 1960-06-08,Desconocido
+José Antonio Gabriel y Galán, 1960-06-08,Desconocido
+Sylvianne A Gacinski, 1960-06-08,Desconocido
+H.-G. Gadamer, 1960-06-08,Desconocido
+Hans-Georg Gadamer, 1960-06-08,Desconocido
+John Lewis Gaddis, 1960-06-08,Desconocido
+Fernando Gaitán, 1960-06-08,Desconocido
+Antonio Gala, 1960-06-08,Desconocido
+Francisco Galán, 1960-06-08,Desconocido
+Rhea Galanaki, 1960-06-08,Desconocido
+Sergio Galarza, 1960-06-08,Desconocido
+James K. Galbraith, 1960-06-08,Desconocido
+Robert Galbraith, 1960-06-08,Desconocido
+Eduardo Galeano, 1960-06-08,Desconocido
+Peter Galison, 1960-06-08,Desconocido
+Ferran Gallego, 1960-06-08,Desconocido
+Ferrán Gallego, 1960-06-08,Desconocido
+Ferran Gallego, 1960-06-08,Desconocido
+José Luis Gallego, 1960-06-08,Desconocido
+Rubén Gallego, 1960-06-08,Desconocido
+Ferran Gallego (ed.), 1960-06-08,Desconocido
+Miguel Gallego Roca, 1960-06-08,Desconocido
+Raúl Gallegos, 1960-06-08,Desconocido
+Enrique Gallud Jardiel, 1960-06-08,Desconocido
+Álvaro Galmés de Fuentes, 1960-06-08,Desconocido
+Álvaro Galmés de Fuentes (ed.), 1960-06-08,Desconocido
+Pedro Gálvez, 1960-06-08,Desconocido
+Diego Gambetta, 1960-06-08,Desconocido
+Amelia Gamoneda, 1960-06-08,Desconocido
+Antonio Gamoneda, 1960-06-08,Desconocido
+Alejandro Gándara, 1960-06-08,Desconocido
+José Luis Garci, 1960-06-08,Desconocido
+Hugo García, 1960-06-08,Desconocido
+Lola García, 1960-06-08,Desconocido
+Miguel Ángel García, 1960-06-08,Desconocido
+Jacobo García Álvarez, 1960-06-08,Desconocido
+Pablo García Baena, 1960-06-08,Desconocido
+Agustín García Calvo, 1960-06-08,Desconocido
+Javier García Campayo, 1960-06-08,Desconocido
+Ricardo García Cárcel, 1960-06-08,Desconocido
+Fernando García de Cortázar, 1960-06-08,Desconocido
+José Ángel García de Cortázar, 1960-06-08,Desconocido
+Eduardo García de Enterría (dir.), 1960-06-08,Desconocido
+José Luis Garcia Delgado, 1960-06-08,Desconocido
+José Luis García Delgado (ed.), 1960-06-08,Desconocido
+Albert García Espuche, 1960-06-08,Desconocido
+Alfonso García Figueroa, 1960-06-08,Desconocido
+Carmen García García, 1960-06-08,Desconocido
+Carlos García Gual, 1960-06-08,Desconocido
+Enrique García Hernán, 1960-06-08,Desconocido
+Juan García Hortelano, 1960-06-08,Desconocido
+Juan Luis García Hourcade, 1960-06-08,Desconocido
+Luis García Jambrina, 1960-06-08,Desconocido
+Ambrosio García Leal, 1960-06-08,Desconocido
+Esther García Llovet, 1960-06-08,Desconocido
+Jorge García López, 1960-06-08,Desconocido
+Federico García Lorca, 1960-06-08,Desconocido
+Celestino García Marcos, 1960-06-08,Desconocido
+Gabriel García Márquez, 1960-06-08,Desconocido
+José María García Márquez, 1960-06-08,Desconocido
+Francisco García Marquina, 1960-06-08,Desconocido
+José Luis García Martín, 1960-06-08,Desconocido
+Adolfo García Martínez, 1960-06-08,Desconocido
+Carmen García Monerris, 1960-06-08,Desconocido
+Encarna García Monerris, 1960-06-08,Desconocido
+Luis M. García Mora (ed.), 1960-06-08,Desconocido
+Adelaida García Morales, 1960-06-08,Desconocido
+Adellaida García Morales, 1960-06-08,Desconocido
+Manuel García Morente, 1960-06-08,Desconocido
+Luis García Muñoz, 1960-06-08,Desconocido
+Francisco García Olmedo, 1960-06-08,Desconocido
+Adolfo García Ortega, 1960-06-08,Desconocido
+Francisco García Pavón, 1960-06-08,Desconocido
+Ramón García Piñeiro, 1960-06-08,Desconocido
+María Antonia García Quesada, 1960-06-08,Desconocido
+Carlos García Retuerta, 1960-06-08,Desconocido
+Marcos García Rey, 1960-06-08,Desconocido
+Javier García Sánchez, 1960-06-08,Desconocido
+Alejandro García Sanjuán, 1960-06-08,Desconocido
+Rafael García Santos, 1960-06-08,Desconocido
+Fernando García Sanz, 1960-06-08,Desconocido
+Olvido García Valdés, 1960-06-08,Desconocido
+J. E. García-Albea, 1960-06-08,Desconocido
+Alberto García-Alix, 1960-06-08,Desconocido
+Mercedes García-Arenal, 1960-06-08,Desconocido
+Mercedes García-Arenal (ed.), 1960-06-08,Desconocido
+Esteban García-Canal, 1960-06-08,Desconocido
+Santiago García-Clairac, 1960-06-08,Desconocido
+B. García-Hernández, 1960-06-08,Desconocido
+Antonio García-Santesmases, 1960-06-08,Desconocido
+Ignacio García-Valiño, 1960-06-08,Desconocido
+Nathan Gardels, 1960-06-08,Desconocido
+Anthony Laurence Gardner, 1960-06-08,Desconocido
+Martín A. Gardner, 1960-06-08,Desconocido
+Roberto Gargarella, 1960-06-08,Desconocido
+Blanca Garí, 1960-06-08,Desconocido
+Luis Garicano, 1960-06-08,Desconocido
 1
 Valeria,Valeriana,2015-05-05,0,Elisabeth Benavent
 1

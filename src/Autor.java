@@ -4,12 +4,18 @@ import java.util.List;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
-public class Autor {		
+public class Autor extends Object {		
+	
+	// Constantes
+	public static final Integer LONGITUD_MAX_CADENA = 30;
+	public static final Integer LONGITUD_MAX_FECHA = 10;
+	public static final int LONGITUD_MAX_OBJ_BYTES = 140;
 	
 	// atributos 
 	private String nombreCompleto;
 	private LocalDate fechaNacimiento; 
 	private String pais;
+	
 		
 	//constructor
 	public Autor(String nombreCompleto, String fechaNacimiento, String pais) {
@@ -113,17 +119,15 @@ public class Autor {
 	
 	public static Autor leerDesdeLineaDeTexto(String linea) throws Exception {
 		String nombre = "", fecha = "", pais = "";
-		// Haces lo necesario para poder devolver un objeto del tipo Autor
 
 		int  pInicio = 0, pFinal = 0;
 		int i = 0;
 		
 		pFinal = linea.indexOf(',');
-		System.out.println("Buscando " + i + " coma");
+
 		if (pFinal != -1) {
 			while (pFinal != -1) {
-				String palabra = linea.substring(pInicio, pFinal);
-				System.out.println("Palabra extraida: " + palabra);
+				String palabra = linea.substring(pInicio, pFinal).trim();
 				pInicio = pFinal + 1;
 				pFinal = linea.indexOf(',', pInicio);
 				
@@ -134,11 +138,9 @@ public class Autor {
 				}
 				
 				i++;
-				System.out.println("Buscando " + i + " coma");
-				System.out.println("p inicio: " + pInicio + " pFinal: " + pFinal);
 			}
 			
-			String palabra = linea.substring(pInicio);
+			String palabra = linea.substring(pInicio).trim();
 			pais = palabra;
 		}
 		

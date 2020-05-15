@@ -6,7 +6,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Libro extends Object{
+public class Libro extends Object {
+	
+	// Constantes
+	public static final Integer LONGITUD_MAX_CADENA = 30;
+	public static final Integer LONGITUD_MAX_FECHA = 10;
+	public static final int LONGITUD_MAX_OBJ_BYTES = 204;
+	
 	
 	// atributos 
 	private String titulo;
@@ -98,7 +104,9 @@ public class Libro extends Object{
 	public static List<Object> buscarLibrosPorTitulo(List<Object> lista, String buscando) {
 		List<Object> libros = new ArrayList<Object>();
 		Object o;
+		
 		System.out.println("Buscando libro por titulo que contenga: '" + buscando + "'");
+		
 		for (Iterator<Object> i = lista.iterator(); i.hasNext();) {
 			o = (Object) i.next();
 			if (((Libro) o).getTitulo().toLowerCase().contains(buscando.toLowerCase())) {
@@ -170,11 +178,10 @@ public class Libro extends Object{
 		int i = 0;
 		
 		pFinal = linea.indexOf(',');
-		System.out.println("Buscando " + i + " coma");
+		
 		if (pFinal != -1) {
 			while (pFinal != -1) {
-				String palabra = linea.substring(pInicio, pFinal);
-				System.out.println("Palabra extraida: " + palabra);
+				String palabra = linea.substring(pInicio, pFinal).trim();
 				pInicio = pFinal + 1;
 				pFinal = linea.indexOf(',', pInicio);
 				
@@ -188,11 +195,9 @@ public class Libro extends Object{
 					paginas = Integer.parseInt(palabra);
 				}
 				i++;
-				System.out.println("Buscando " + i + " coma");
-				System.out.println("p inicio: " + pInicio + " pFinal: " + pFinal);
 			}
 			
-			String palabra = linea.substring(pInicio);
+			String palabra = linea.substring(pInicio).trim();
 			
 			listadoAutores = Autor.buscarAutoresPorNombre(autores, palabra);
 			
